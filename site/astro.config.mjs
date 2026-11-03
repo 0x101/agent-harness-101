@@ -9,7 +9,7 @@ import remarkCourseLinks from './src/plugins/remark-course-links.mjs';
 const readingKeys = readReadings().map((r) => r.key);
 
 export default defineConfig({
-  site: 'https://agent-harness-101.example',
+  site: 'https://agent-harness-101.vercel.app',
   markdown: {
     // Astro 7 defaults to the Sätteri processor; the course needs remark plugins, so use unified.
     processor: unified({

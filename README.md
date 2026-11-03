@@ -6,7 +6,7 @@ The tutor is Claude Code with a set of rules in `tutor/SYSTEM.md`: it quizzes yo
 
 ## Three ways in
 
-1. **Read the course on the site.** The curriculum, every session, and a reading guide for each of the 47 papers and posts, with citations that link. No setup. (Site URL goes here once deployed; until then, `make site-dev`.)
+1. **Read the course on the site.** The curriculum, every session, and a reading guide for each of the 47 papers and posts, with citations that link. No setup: https://agent-harness-101.vercel.app
 2. **Run the lab on your machine.** Create your own repository from this template, clone it, and work through the sessions with Claude Code. This is the intended path.
 3. **Run it in Codespaces.** Open your copy in a GitHub Codespace; `.devcontainer/` installs Python, Node and Claude Code. Set `ANTHROPIC_API_KEY` as a Codespaces secret first.
 
