@@ -1,0 +1,75 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+const repo = 'https://github.com/0x101/agent-harness-101';
+const headings = [
+  { depth: 2, slug: 'setup', text: 'Set up your own lab' },
+  { depth: 2, slug: 'codespaces', text: 'Or open it in Codespaces' },
+];
+---
+
+<StarlightPage frontmatter={{ title: 'Lab' }} headings={headings}>
+  <p id="lab-status" class="lab-status">Checking for a local lab server on port 8787…</p>
+
+  <h2 id="setup">Set up your own lab</h2>
+  <ol>
+    <li>
+      On GitHub, open <a href={repo}>the template</a> and choose <strong>Use this template</strong> to
+      create your own repository, then clone it.
+    </li>
+    <li>
+      Create the environment:
+      <pre><code>python3 -m venv .venv &amp;&amp; source .venv/bin/activate
+pip install -r requirements.txt</code></pre>
+    </li>
+    <li>
+      Fetch the readings to your machine (they are not in the repository): <code>make papers</code>
+    </li>
+    <li>
+      Set <code>ANTHROPIC_API_KEY</code>, then check the tasks: <code>python evals/run.py --mode oracle</code>
+      should score 12/12.
+    </li>
+    <li>
+      Open the repository in Claude Code and type <code>/today</code>. The tutor reads your place in
+      <code>log/STATE.md</code> and runs the session with you.
+    </li>
+  </ol>
+
+  <h2 id="codespaces">Or open it in Codespaces</h2>
+  <p>
+    The repository ships a devcontainer. Create a codespace from your copy of the template and the
+    dependencies are installed for you; the lab server, once it exists, is forwarded on port 8787 and
+    this page will show it.
+  </p>
+
+  <script is:inline>
+    (function () {
+      var el = document.getElementById('lab-status');
+      fetch('http://localhost:8787/api/state', { mode: 'cors' })
+        .then(function (r) {
+          if (!r.ok) throw new Error(String(r.status));
+          return r.json();
+        })
+        .then(function () {
+          el.innerHTML =
+            'Local lab server detected. <a href="http://localhost:8787">Open the lab at localhost:8787</a>.';
+          el.classList.add('lab-status-ok');
+        })
+        .catch(function () {
+          el.textContent = 'No local lab server detected. Set one up below.';
+        });
+    })();
+  </script>
+</StarlightPage>
+
+<style>
+  .lab-status {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    color: var(--sl-color-gray-2);
+  }
+  .lab-status-ok {
+    border-color: var(--sl-color-green);
+    color: var(--sl-color-white);
+  }
+</style>

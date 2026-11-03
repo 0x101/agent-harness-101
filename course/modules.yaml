@@ -1,0 +1,32 @@
+# Modules of the Agent Harness 101 curriculum. Session files live in sessions/.
+modules:
+  - id: M0
+    title: "Orientation and baseline"
+    sessions: [S01, S02, S03]
+  - id: M1
+    title: "The agent-computer interface"
+    sessions: [S04, S05, S06, S07, S08, S09]
+  - id: M2
+    title: "Loop control and reliability"
+    sessions: [S10, S11, S12]
+  - id: M3
+    title: "Context management"
+    sessions: [S13, S14, S15, S16, S17, S18]
+  - id: M4
+    title: "Planning"
+    sessions: [S19, S20, S21, S22]
+  - id: M5
+    title: "Subagents and orchestration"
+    sessions: [S23, S24, S25, S26]
+  - id: M6
+    title: "Verification and long-running work"
+    sessions: [S27, S28, S29, S30]
+  - id: M7
+    title: "Evaluation rigor"
+    sessions: [S31, S32, S33, S34]
+  - id: M8
+    title: "Harness optimization"
+    sessions: [S35, S36, S37, S38]
+  - id: M9
+    title: "Porting to a domain"
+    sessions: [S39, S40, S41, S42]

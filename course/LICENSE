@@ -1,0 +1,14 @@
+The course content in this directory (curriculum.md, modules.yaml, sessions/,
+readings/, readings.tsv, readings.bib) is licensed under the Creative Commons
+Attribution 4.0 International License (CC BY 4.0).
+
+Copyright (c) 2026 Balachandar Ganesh
+
+You may share and adapt it for any purpose, including commercially, as long as
+you give appropriate credit, link to the license, and indicate if changes were
+made. Full text: https://creativecommons.org/licenses/by/4.0/legalcode
+
+This license covers the course text only. The papers and posts it refers to
+belong to their authors; readings.tsv records each item's license, and
+papers/fetch.sh downloads them to your machine without redistributing them.
+The code outside this directory is under the MIT License in ../LICENSE.

@@ -1,0 +1,6 @@
+# Learner-owned paths. On `git merge upstream/main`, a conflict here keeps the learner's version.
+# `make init` enables the driver with: git config merge.ours.driver true
+harness/**        merge=ours
+scripts/**        merge=ours
+log/**            merge=ours
+evals/results/**  merge=ours

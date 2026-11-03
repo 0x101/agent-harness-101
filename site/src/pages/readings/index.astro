@@ -1,0 +1,59 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getCollection } from 'astro:content';
+import { licenseLabel } from '../../lib/course.mjs';
+
+const all = (await getCollection('readings')).map((r) => r.data);
+const num = (k: string) => Number(k.slice(1));
+const groups = [
+  { id: 'anthropic-posts', label: 'Anthropic engineering posts', prefix: 'A' },
+  { id: 'other-posts', label: 'Other posts', prefix: 'B' },
+  { id: 'papers', label: 'Papers', prefix: 'P' },
+  { id: 'repositories', label: 'Repositories', prefix: 'R' },
+].map((g) => ({
+  ...g,
+  items: all.filter((r) => r.key.startsWith(g.prefix)).sort((a, b) => num(a.key) - num(b.key)),
+}));
+const headings = groups.map((g) => ({ depth: 2, slug: g.id, text: g.label }));
+---
+
+<StarlightPage frontmatter={{ title: 'Readings' }} headings={headings}>
+  <p>
+    Every session names its reading by key. Each key has a guide saying which sections the course
+    needs and where the reading comes up. The site links to each source and does not host copies;
+    <code>make papers</code> in your own clone fetches them for the tutor to open.
+  </p>
+  {
+    groups.map((g) => (
+      <>
+        <h2 id={g.id}>{g.label}</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Title</th>
+              <th>Authors</th>
+              <th>Year</th>
+              <th>License</th>
+            </tr>
+          </thead>
+          <tbody>
+            {g.items.map((r) => (
+              <tr>
+                <td>
+                  <a href={`/readings/${r.key}/`}>{r.key}</a>
+                </td>
+                <td>
+                  <a href={`/readings/${r.key}/`}>{r.title}</a>
+                </td>
+                <td>{r.authors}</td>
+                <td>{r.year}</td>
+                <td>{licenseLabel(r.license)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    ))
+  }
+</StarlightPage>

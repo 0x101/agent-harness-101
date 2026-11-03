@@ -1,0 +1,12 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('overview', 'curriculum');
+if (!entry) throw new Error('course/curriculum.md not found');
+const { Content, headings } = await render(entry);
+---
+
+<StarlightPage frontmatter={{ title: 'Curriculum' }} headings={headings}>
+  <Content />
+</StarlightPage>

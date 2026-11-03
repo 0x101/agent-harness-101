@@ -1,0 +1,89 @@
+---
+// Override of Starlight's PageTitle. Session pages get "S15. Title", their module, and a
+// readings line; every other page gets the plain title.
+import { getCollection } from 'astro:content';
+import { readModules } from '../lib/course.mjs';
+
+const data = Astro.locals.starlightRoute.entry.data as Record<string, any>;
+const isSession = typeof data.id === 'string' && /^S\d\d$/.test(data.id);
+
+let moduleLabel = '';
+let readings: { key: string; title: string }[] = [];
+let optional: { key: string; title: string }[] = [];
+if (isSession) {
+  const mod = readModules().find((m) => m.id === data.module);
+  moduleLabel = mod ? `${mod.id}. ${mod.title}` : data.module;
+  const all = await getCollection('readings');
+  const withTitle = (key: string) => ({
+    key,
+    title: all.find((r) => r.data.key === key)?.data.title ?? key,
+  });
+  readings = (data.reads ?? []).map(withTitle);
+  optional = (data.optional ?? []).map(withTitle);
+}
+---
+
+{
+  isSession ? (
+    <>
+      <p class="session-module">{moduleLabel}</p>
+      <h1 id="_top">
+        {data.id}. {data.title}
+      </h1>
+      {readings.length > 0 ? (
+        <p class="session-readings">
+          <strong>Readings:</strong>{' '}
+          {readings.map((r, i) => (
+            <>
+              {i > 0 && '; '}
+              <a href={`/readings/${r.key}/`}>{r.key}</a>, {r.title}
+            </>
+          ))}
+        </p>
+      ) : (
+        <p class="session-readings">
+          <strong>Readings:</strong> none. Your trajectories, logs or code are the reading.
+        </p>
+      )}
+      {optional.length > 0 && (
+        <p class="session-readings">
+          <strong>Optional:</strong>{' '}
+          {optional.map((r, i) => (
+            <>
+              {i > 0 && '; '}
+              <a href={`/readings/${r.key}/`}>{r.key}</a>, {r.title}
+            </>
+          ))}
+        </p>
+      )}
+    </>
+  ) : (
+    <h1 id="_top">{data.title}</h1>
+  )
+}
+
+<style>
+  @layer starlight.core {
+    h1 {
+      margin-top: 1rem;
+      font-size: var(--sl-text-h1);
+      line-height: var(--sl-line-height-headings);
+      font-weight: 600;
+      color: var(--sl-color-white);
+    }
+  }
+  .session-module {
+    margin-top: 1rem;
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .session-module + h1 {
+    margin-top: 0.25rem;
+  }
+  .session-readings {
+    margin-top: 0.75rem;
+    color: var(--sl-color-gray-2);
+  }
+</style>

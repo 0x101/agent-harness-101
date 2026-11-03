@@ -1,0 +1,60 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { CardGrid, LinkCard } from '@astrojs/starlight/components';
+const repo = 'https://github.com/0x101/agent-harness-101';
+---
+
+<StarlightPage
+  frontmatter={{
+    title: 'Agent Harness 101',
+    template: 'splash',
+    hero: {
+      tagline:
+        'Learn agent harness engineering by growing a deliberately naive coding agent, one measured change at a time.',
+      actions: [
+        { text: 'Start with the curriculum', link: '/curriculum/', variant: 'primary' },
+        { text: 'Browse the readings', link: '/readings/', variant: 'minimal' },
+      ],
+    },
+  }}
+>
+  <p>
+    Agent Harness 101 is a 42-session course. You start with an agent of about a hundred lines: one bash
+    tool, no output truncation, no memory management, and no check on its own work. Over ten modules
+    you add the components real harnesses have, in the order the literature motivates them: tool
+    output truncation, file and edit tools, stuck detection, context management, planning, subagents,
+    verification gates, and finally an outer loop that proposes changes to the harness itself.
+  </p>
+  <p>
+    Every change is measured against a twelve-task eval set, with pass rate and token counts side by
+    side, so you learn what each component is worth rather than taking it on faith. Each session pairs
+    the build with the paper or post that motivates it.
+  </p>
+
+  <h2>Three ways in</h2>
+  <CardGrid>
+    <LinkCard
+      title="Read the site"
+      description="The curriculum session by session, with a guide for each reading and links to the sources. No setup."
+      href="/curriculum/"
+    />
+    <LinkCard
+      title="Run the lab"
+      description="Create your own repository from the template, open it in Claude Code, and type /today. Your agent, your logs, your numbers."
+      href="/lab/"
+    />
+    <LinkCard
+      title="Open in Codespaces"
+      description="The same lab with no local setup. The devcontainer installs the dependencies and forwards the lab server."
+      href={repo}
+    />
+  </CardGrid>
+
+  <h2>What is in the box</h2>
+  <ul>
+    <li><a href="/curriculum/">Curriculum</a>: 42 sessions across 10 modules, each with a read, a build and a measure step.</li>
+    <li><a href="/readings/">Readings</a>: 22 papers, 12 posts and 2 repositories, each with a guide to what to read and what to skip.</li>
+    <li><a href="/lab/">Lab</a>: the eval runner, the twelve tasks, the naive agent, and the tutor that runs each session with you.</li>
+    <li><a href={repo}>Source</a>: the code is MIT licensed and the course text is CC BY 4.0.</li>
+  </ul>
+</StarlightPage>
