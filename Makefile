@@ -43,6 +43,7 @@ eval:
 test:
 	@$(PY) -m unittest discover harness/tests
 	@$(PY) -m unittest discover tutor/tests
+	@$(PY) -m unittest discover evals/tests
 
 unlock:
 	@mkdir -p .lab && touch .lab/unlock-harness && echo "harness/ unlocked for the tutor until $$(date -v+1H '+%H:%M' 2>/dev/null || date -d '+1 hour' '+%H:%M')"
