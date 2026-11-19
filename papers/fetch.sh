@@ -9,7 +9,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 MANIFEST="../course/readings.tsv"
 mkdir -p pdf web repos
-UA="Mozilla/5.0 (agent-harness-101 study fetcher)"
+UA="agent-harness-101-study-fetcher/1.0 (+https://github.com/0x101/agent-harness-101)"
 
 # columns: key kind source file title authors year license read skip bibkey
 tail -n +2 "$MANIFEST" | while IFS=$'\t' read -r key kind source file _rest; do
