@@ -76,7 +76,7 @@ Most of what you build in the next 41 sessions is a change to one of these six p
 
 ## How real harnesses do it
 
-- [mini-swe-agent, `agents/default.py`](https://github.com/SWE-agent/mini-swe-agent/blob/main/src/minisweagent/agents/default.py). The same loop in a harness used for research: `run` calls `step` until an exit message appears. Look at `query`, which checks a step limit, a cost limit and a time limit before every model call. Yours has only the first.
+- [mini-swe-agent, `agents/default.py`](https://github.com/SWE-agent/mini-swe-agent/blob/main/src/minisweagent/agents/default.py). The same loop in a harness used for research: `run` calls `step` until an exit message appears. Look at `query`, which checks a step limit, a cost limit and a time limit before every model call (by default only the cost limit is switched on). Yours has only a step limit.
 - [How Claude Code works: the agentic loop](https://code.claude.com/docs/en/how-claude-code-works#the-agentic-loop). The official description of a production harness. Notice that it names the same two parts, a model that reasons and tools that act, and calls the layer around them the harness.
 
 ## Build
@@ -147,7 +147,7 @@ Nothing to compare yet. Write down the steps, tokens and dollars from the smoke 
 ## Design choices
 
 - **One tool, and it is bash.** The alternative is a tool for each job: read a file, edit a file, search. Separate tools let you shape what the model sees and stop some mistakes before they happen. One tool keeps the starting point small, so each later addition can be measured against it. You build the alternative in S06 to S08 and measure it in S09.
-- **A step cap is the only limit.** mini-swe-agent also stops on cost and on time. A cost limit is the better choice once tasks differ a lot in length, because 30 short steps and 30 long ones cost very different amounts.
+- **A step cap is the only limit.** mini-swe-agent can also stop on cost and on time. A cost limit is the better choice once tasks differ a lot in length, because 30 short steps and 30 long ones cost very different amounts.
 - **The model decides when it is finished.** The alternative is for the harness to check, for example by running the tests before accepting "done". That is module M6.
 
 ## Log
