@@ -1,5 +1,7 @@
 # Agent Harness 101 curriculum
 
+New to the course? Begin with [Start here](start-here.md) for setup, and the [primer](primer.md) for the ideas session 1 assumes.
+
 This curriculum has 42 sessions of 45 to 60 minutes each. At five sessions a week it takes about eight and a half weeks.
 
 Every session follows the same shape:

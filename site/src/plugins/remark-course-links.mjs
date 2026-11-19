@@ -11,6 +11,7 @@ export default function remarkCourseLinks() {
       else if ((m = url.match(/^(?:\.\.\/)?readings\/([ABPR]\d{1,2})\.md(#.*)?$/))) node.url = `/readings/${m[1]}/${m[2] ?? ''}`;
       else if (/^(?:\.\.\/)?readings\.(tsv|bib)$/.test(url)) node.url = '/readings/';
       else if (/^(?:\.\.\/)?curriculum\.md$/.test(url)) node.url = '/curriculum/';
+      else if ((m = url.match(/^(?:\.\.\/)?(start-here|primer)\.md(#.*)?$/))) node.url = `/${m[1]}/${m[2] ?? ''}`;
     });
     const first = tree.children[0];
     if (first && first.type === 'heading' && first.depth === 1) tree.children.shift();

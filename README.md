@@ -2,6 +2,8 @@
 
 Learn agent harness engineering by building one. You start with a deliberately naive coding agent, about a hundred lines with a single bash tool, and grow it one component at a time over 42 sessions: tool design, loop control, context management, planning, subagents, verification, evaluation rigor, and harness optimization. Every session reads the paper or post that motivates a component, builds it, and measures it against a 12-task eval set. The deliverable is your understanding, not the code.
 
+New here? [`course/start-here.md`](course/start-here.md) takes you from nothing to ready for session 1.
+
 The tutor is Claude Code with a set of rules in `tutor/SYSTEM.md`: it quizzes you on the reading, gives hints in escalating steps, reviews your changes, and refuses to write your agent for you unless you ask it to.
 
 ## Three ways in
