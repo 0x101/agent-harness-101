@@ -3,5 +3,15 @@
   "installCommand": "cd site && npm ci",
   "buildCommand": "cd site && npm run build",
   "outputDirectory": "site/dist",
-  "framework": null
+  "framework": null,
+  "headers": [
+    {
+      "source": "/(.*)\\.md",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
+    },
+    {
+      "source": "/(llms|llms-full)\\.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
+    }
+  ]
 }

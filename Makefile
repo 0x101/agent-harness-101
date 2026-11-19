@@ -11,7 +11,7 @@ help:
 	@echo "eval      run your agent on every task: make eval LABEL=truncation"
 	@echo "test      unit tests for the harness and the tutor hook (no API calls)"
 	@echo "unlock    let the tutor edit harness/ for one hour; lock ends it early"
-	@echo "site      build the website from course/; site-dev serves it with reload"
+	@echo "site      build the website from course/ and check its Markdown pages; site-dev serves it with reload"
 
 init:
 	@git config merge.ours.driver true
@@ -52,7 +52,7 @@ lock:
 	@rm -f .lab/unlock-harness && echo "harness/ locked"
 
 site:
-	@cd site && npm install && npm run build
+	@cd site && npm install && npm run build && npm run check
 
 site-dev:
 	@cd site && npm install && npm run dev
