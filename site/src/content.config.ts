@@ -48,7 +48,7 @@ export const collections = {
     }),
   }),
   overview: defineCollection({
-    loader: glob({ base: '../course', pattern: 'curriculum.md', generateId: keepName }),
+    loader: glob({ base: '../course', pattern: '{curriculum,start-here,primer}.md', generateId: keepName }),
     schema: z.object({}),
   }),
 };

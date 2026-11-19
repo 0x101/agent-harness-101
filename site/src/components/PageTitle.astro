@@ -3,9 +3,13 @@
 // readings line; every other page gets the plain title.
 import { getCollection } from 'astro:content';
 import { readModules } from '../lib/course.mjs';
+import { markdownPathFor } from '../lib/markdown-pages.mjs';
+import CopyPage from './CopyPage.astro';
 
 const data = Astro.locals.starlightRoute.entry.data as Record<string, any>;
 const isSession = typeof data.id === 'string' && /^S\d\d$/.test(data.id);
+// Pages with a Markdown version (sessions, readings, overview pages) get Copy page / View as Markdown.
+const markdownPath = markdownPathFor(Astro.url.pathname);
 
 let moduleLabel = '';
 let readings: { key: string; title: string }[] = [];
@@ -61,6 +65,7 @@ if (isSession) {
     <h1 id="_top">{data.title}</h1>
   )
 }
+{markdownPath && <CopyPage href={markdownPath} />}
 
 <style>
   @layer starlight.core {

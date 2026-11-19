@@ -24,6 +24,8 @@ export default defineConfig({
         'Learn agent harness engineering by growing a naive coding agent, one measured change at a time.',
       components: { PageTitle: './src/components/PageTitle.astro' },
       sidebar: [
+        { label: 'Start here', link: '/start-here/' },
+        { label: 'Primer', link: '/primer/' },
         { label: 'Curriculum', link: '/curriculum/' },
         ...buildSidebar(),
         { label: 'Readings', link: '/readings/' },

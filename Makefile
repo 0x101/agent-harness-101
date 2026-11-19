@@ -11,7 +11,7 @@ help:
 	@echo "eval      run your agent on every task: make eval LABEL=truncation"
 	@echo "test      unit tests for the harness and the tutor hook (no API calls)"
 	@echo "unlock    let the tutor edit harness/ for one hour; lock ends it early"
-	@echo "site      build the website from course/; site-dev serves it with reload"
+	@echo "site      build the website from course/ and check its Markdown pages; site-dev serves it with reload"
 
 init:
 	@git config merge.ours.driver true
@@ -43,6 +43,7 @@ eval:
 test:
 	@$(PY) -m unittest discover harness/tests
 	@$(PY) -m unittest discover tutor/tests
+	@$(PY) -m unittest discover evals/tests
 
 unlock:
 	@mkdir -p .lab && touch .lab/unlock-harness && echo "harness/ unlocked for the tutor until $$(date -v+1H '+%H:%M' 2>/dev/null || date -d '+1 hour' '+%H:%M')"
@@ -51,7 +52,7 @@ lock:
 	@rm -f .lab/unlock-harness && echo "harness/ locked"
 
 site:
-	@cd site && npm install && npm run build
+	@cd site && npm install && npm run build && npm run check
 
 site-dev:
 	@cd site && npm install && npm run dev

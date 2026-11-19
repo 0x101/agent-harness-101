@@ -1,0 +1,12 @@
+---
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
+import { getEntry, render } from 'astro:content';
+
+const entry = await getEntry('overview', 'start-here');
+if (!entry) throw new Error('course/start-here.md not found');
+const { Content, headings } = await render(entry);
+---
+
+<StarlightPage frontmatter={{ title: 'Start here' }} headings={headings}>
+  <Content />
+</StarlightPage>
